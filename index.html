@@ -360,10 +360,10 @@
             <span class="card-title" style="margin:0">Noise trend — last 5 minutes</span>
             <select id="trend-zone-filter" onchange="updateTrendChart()">
               <option value="all">All zones</option>
-              <option value="0">Reading Room</option>
-              <option value="1">Reference Section</option>
+              <option value="0">Main Reading Area</option>
+              <option value="1">Bookshelves Area</option>
               <option value="2">Computer Area</option>
-              <option value="3">Group Discussion</option>
+              <option value="3">Group Discussion Rooms</option>
             </select>
           </div>
           <div class="chart-wrap" style="height:280px">
@@ -372,10 +372,10 @@
           <div id="trend-legend" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:11px;color:var(--muted);"></div>
         </div>
         <div class="metrics">
-          <div class="metric-card"><div class="metric-label">Reading Room avg</div><div class="metric-value" id="s-0">—</div><div class="metric-sub">dB (last 5 min)</div></div>
-          <div class="metric-card"><div class="metric-label">Reference avg</div><div class="metric-value" id="s-1">—</div><div class="metric-sub">dB</div></div>
+          <div class="metric-card"><div class="metric-label">Main Reading Area avg</div><div class="metric-value" id="s-0">—</div><div class="metric-sub">dB (last 5 min)</div></div>
+          <div class="metric-card"><div class="metric-label">Bookshelves Area avg</div><div class="metric-value" id="s-1">—</div><div class="metric-sub">dB</div></div>
           <div class="metric-card"><div class="metric-label">Computer Area avg</div><div class="metric-value" id="s-2">—</div><div class="metric-sub">dB</div></div>
-          <div class="metric-card"><div class="metric-label">Discussion avg</div><div class="metric-value" id="s-3">—</div><div class="metric-sub">dB</div></div>
+          <div class="metric-card"><div class="metric-label">Discussion Rooms avg</div><div class="metric-value" id="s-3">—</div><div class="metric-sub">dB</div></div>
         </div>
       </div>
 
@@ -443,11 +443,11 @@
           <div class="card">
             <div class="card-title">Zones</div>
             <div class="settings-row">
-              <div><div class="settings-label">Reading Room</div><div class="settings-sub">Zone 1</div></div>
+              <div><div class="settings-label">Main Reading Area</div><div class="settings-sub">Zone 1</div></div>
               <button class="toggle on" onclick="this.classList.toggle('on')"></button>
             </div>
             <div class="settings-row">
-              <div><div class="settings-label">Reference Section</div><div class="settings-sub">Zone 2</div></div>
+              <div><div class="settings-label">Bookshelves Area</div><div class="settings-sub">Zone 2</div></div>
               <button class="toggle on" onclick="this.classList.toggle('on')"></button>
             </div>
             <div class="settings-row">
@@ -455,7 +455,7 @@
               <button class="toggle on" onclick="this.classList.toggle('on')"></button>
             </div>
             <div class="settings-row">
-              <div><div class="settings-label">Group Discussion Room</div><div class="settings-sub">Zone 4</div></div>
+              <div><div class="settings-label">Group Discussion Rooms</div><div class="settings-sub">Zone 4</div></div>
               <button class="toggle on" onclick="this.classList.toggle('on')"></button>
             </div>
           </div>
@@ -488,7 +488,7 @@
 
 <script>
 // ── Data ──
-const ZONES = ['Reading Room','Reference Section','Computer Area','Group Discussion'];
+const ZONES = ['Main Reading Area','Bookshelves Area','Computer Area','Group Discussion Rooms'];
 const ZONE_COLORS = ['#2d6a4f','#7d4e00','#1a4d8b','#6b2d6b'];
 const HOURS = ['8am','9am','10am','11am','12pm','1pm','2pm','3pm'];
 const HIST_LEN = 150; // ~5 min at 2s
@@ -503,12 +503,12 @@ let trendChart, donutChart;
 
 // Heatmap data (static)
 const hmData = ZONES.map((_, zi) => {
-  const bases = [36, 38, 56, 64];
+  const bases = [36, 38, 62, 70];
   return HOURS.map(() => Math.round(bases[zi] + (Math.random() - 0.5) * 14));
 });
 
 function randDb(zi) {
-  const bases = [38, 42, 57, 64];
+  const bases = [36, 38, 62, 70];
   return Math.max(28, Math.min(88, bases[zi] + (Math.random() - 0.5) * 16));
 }
 
